@@ -1,0 +1,40 @@
+-- investigate table
+
+--  SELECT title, score
+-- FROM hacker_news
+-- ORDER BY score DESC
+-- LIMIT 5;
+-- check total score
+-- select sum(score) from hacker_news
+
+
+-- check 1-9-90 rule presence on website
+-- select user, sum(score) from hacker_news group by user having sum(score)  >200 order by 2 desc;
+-- select  (517 + 309 + 304 + 282) / 6366.0*100;
+-- check for spammers
+-- select user, count (*) from hacker_news where url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ" group by user order by count(*) desc
+
+
+
+-- check for most used source
+-- categorize links
+-- SELECT CASE
+--    WHEN url LIKE '%github%' THEN 'GitHub'
+--    WHEN url LIKE '%medium.com%' THEN 'Medium'
+--    WHEN url LIKE '%nytimes.com%' THEN 'New York Times'
+--    ELSE 'Other'
+--   END AS 'Source',
+--   count(*)
+-- FROM hacker_news group by 1 order by 1 desc;
+
+-- look for best time to post a story
+
+-- SELECT timestamp
+-- FROM hacker_news
+-- LIMIT 10;
+
+-- give timestamp a usable format
+SELECT   strftime('%H', timestamp) as time_of_day,round(avg(score),0)  score,count(*) num_stories
+FROM hacker_news where 1  not null
+GROUP BY 1 order by 2 desc;
+
